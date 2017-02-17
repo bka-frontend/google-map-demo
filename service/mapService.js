@@ -24,7 +24,7 @@ angular.module('map')
 
         this.renderVan = function () {
             var marker = new google.maps.Marker({
-                icon: "./service/van.png",
+                icon: "./resources/img/van.png",
                 position: _hamilton.coordinate,
                 map: _map,
             });
