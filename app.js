@@ -1,0 +1,1 @@
+angular.module('map',['mgcrea.ngStrap.aside','ngAnimate']);
