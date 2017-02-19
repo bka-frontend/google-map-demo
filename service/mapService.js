@@ -2,7 +2,7 @@
 
 angular.module('map')
     .service('mapService', function (resources, $aside) {
-        var _map;
+        var _map, myModal;
 
         var _auckland = _.find(resources.cities,function(city){
             return city.name=='Auckland';
@@ -26,10 +26,11 @@ angular.module('map')
             var marker = new google.maps.Marker({
                 icon: "./resources/img/van.png",
                 position: _hamilton.coordinate,
+                animation: google.maps.Animation.DROP,
                 map: _map,
             });
             marker.addListener('click', function(){
-                var myModal = $aside({title: 'Title', content: 'Hello Hamilton!', show: true});
+                myModal = $aside({title: _hamilton.name, content: _hamilton.description, show: true});
             });
         }
 
@@ -54,7 +55,7 @@ angular.module('map')
                     map: _map,
                 });
                 marker.addListener('click', function(){
-                    var myModal = $aside({title: 'Title', content: 'Hello ' + city.name + '!', show: true});
+                    var myModal = $aside({title: city.name, content: city.description, show: true});
                 });
             });
         }
@@ -75,7 +76,7 @@ angular.module('map')
                 origin: new google.maps.LatLng(_auckland.coordinate.lat, _auckland.coordinate.lng),
                 destination: new google.maps.LatLng(_hamilton.coordinate.lat, _hamilton.coordinate.lng),
                 optimizeWaypoints: true,
-                travelMode: google.maps.TravelMode.DRIVING
+                travelMode: google.maps.TravelMode
             }, function (result, status) {
                 if (status == google.maps.DirectionsStatus.OK)
                 {
